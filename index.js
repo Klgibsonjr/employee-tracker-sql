@@ -72,3 +72,15 @@ const mainMenu = () => {
       }
     });
 };
+
+const viewAllDepartments = () => {
+  console.log('Viewing all departments...\n');
+
+  let query = 'SELECT * FROM department;';
+
+  databaseConnection.query(query, (err, res) => {
+    if (err) throw err;
+    console.table(res);
+    mainMenu();
+  });
+};
