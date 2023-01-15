@@ -106,7 +106,7 @@ const viewAllEmployees = () => {
 const viewAllRoles = () => {
   console.log('Viewing all employee roles...\n');
 
-  const query = `SELECT role.title, role.id, role.department_id, role.salary;`;
+  const query = `SELECT role.id, role.title, role.department_id, role.salary FROM role;`;
 
   database.query(query, (err, res) => {
     if (err) throw err;
