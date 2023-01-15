@@ -119,12 +119,20 @@ const addDepartment = () => {
     if (err) throw err;
     console.log(err);
 
-    inquirer.prompt([
-      {
-        type: 'list',
-        name: 'department',
-        choices: ['Sales', 'Engineering', 'Finance', 'Customer Service'],
-      },
-    ]);
+    inquirer
+      .prompt([
+        {
+          type: 'list',
+          name: 'department',
+          choices: ['Sales', 'Engineering', 'Finance', 'Customer Service'],
+        },
+      ])
+      .then((response) => {
+        let query = `INSERT INTO department (department_name) VALUES (?)`;
+        database.query(query, response.name, (err) => {
+          if (err) throw err;
+          console.log(response.name + ' department has been added.');
+        });
+      });
   });
 };
