@@ -1,6 +1,7 @@
 const inquirer = require('inquirer');
 const mysql = require('mysql2');
 require('dotenv').config();
+require('console.table');
 
 const database = mysql.createConnection(
   {
@@ -37,8 +38,8 @@ const mainMenu = () => {
       },
     ])
     .then((response) => {
-      switch (response.mainMenu) {
-        case 'View alll departments':
+      switch (response.main_menu) {
+        case 'View all departments':
           viewAllDepartments();
           break;
 
@@ -76,7 +77,7 @@ const mainMenu = () => {
 const viewAllDepartments = () => {
   console.log('Viewing all departments...\n');
 
-  const query = 'SELECT * FROM department';
+  const query = `SELECT department.id AS id, department.department_name AS department FROM department`;
 
   database.query(query, (err, res) => {
     if (err) throw err;
@@ -88,7 +89,7 @@ const viewAllDepartments = () => {
 const viewAllEmployees = () => {
   console.log('Viewing all employees...\n');
 
-  const query = `SELECT employee.id, employee.first_name, employee.last_name, role.title, department.name AS department, role.salary, CONCAT(manager.first_name, ' ', manager.last_name) AS manager
+  const query = `SELECT employee.id, employee.first_name, employee.last_name, role.title, department.department_name AS department, role.salary, CONCAT(manager.first_name, ' ', manager.last_name) AS manager
     FROM employee
     LEFT JOIN employee manager on manager.id = employee.manager_id
     INNER JOIN role ON (role.id = employee.role_id)
