@@ -2,7 +2,7 @@ const inquirer = require('inquirer');
 const mysql = require('mysql2');
 require('dotenv').config();
 
-const databaseConnection = mysql.createConnection(
+const database = mysql.createConnection(
   {
     host: 'localhost',
     user: process.env.DB_USER,
@@ -12,7 +12,7 @@ const databaseConnection = mysql.createConnection(
   console.log('Connected to company database.')
 );
 
-databaseConnection.connect((err) => {
+database.connect((err) => {
   if (err) throw err;
   mainMenu();
 });
@@ -67,7 +67,7 @@ const mainMenu = () => {
           break;
 
         case 'Quit':
-          databaseConnection.end();
+          database.end();
           break;
       }
     });
@@ -76,9 +76,9 @@ const mainMenu = () => {
 const viewAllDepartments = () => {
   console.log('Viewing all departments...\n');
 
-  let query = 'SELECT * FROM department;';
+  let query = 'SELECT * FROM department';
 
-  databaseConnection.query(query, (err, res) => {
+  database.query(query, (err, res) => {
     if (err) throw err;
     console.table(res);
     mainMenu();
