@@ -27,12 +27,16 @@ const mainMenu = () => {
         message: 'What would you like to do? ',
         choices: [
           'View all departments',
-          'Add a department',
           'View all employees',
-          'Add a new employee',
           'View all roles',
+          'Add a department',
+          'Add a new employee',
           'Add a role',
           'Update employee role',
+          'Update employee manager',
+          'View employees by department',
+          'View employee by manager',
+          'View total budget by department',
           'Quit',
         ],
       },
@@ -43,20 +47,20 @@ const mainMenu = () => {
           viewAllDepartments();
           break;
 
-        case 'Add a department':
-          addDepartment();
-          break;
-
         case 'View all employees':
           viewAllEmployees();
           break;
 
-        case 'Add a new employee':
-          addEmployee();
-          break;
-
         case 'View all roles':
           viewAllRoles();
+          break;
+
+        case 'Add a department':
+          addDepartment();
+          break;
+
+        case 'Add a new employee':
+          addEmployee();
           break;
 
         case 'Add a role':
@@ -65,6 +69,22 @@ const mainMenu = () => {
 
         case 'Update employee role':
           updateEmployeeRole();
+          break;
+
+        case 'Update employee manager':
+          updateEmployeeManager();
+          break;
+
+        case 'View employees by department':
+          viewEmployeesByDepartment();
+          break;
+
+        case 'View employees by manager':
+          viewAllEmployeesByManager();
+          break;
+
+        case 'View total budget by department':
+          viewDepartmentBudget();
           break;
 
         case 'Quit':
@@ -137,3 +157,17 @@ const addDepartment = () => {
       });
   });
 };
+
+const addEmployee = () => {};
+
+const addRole = () => {};
+
+const updateEmployeeRole = () => {};
+
+const updateEmployeeManager = () => {};
+
+const viewEmployeesByDepartment = () => {};
+
+const viewAllEmployeesByManager = () => {};
+
+const viewDepartmentBudget = () => {};
