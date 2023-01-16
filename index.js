@@ -159,7 +159,68 @@ const addDepartment = () => {
 };
 
 const addEmployee = () => {
-  database.query;
+  inquirer
+    .prompt([
+      {
+        type: 'input',
+        name: 'first_name',
+        message: 'Please enter employees first name:',
+        validate: (inputFirstName) => {
+          if (inputFirstName) {
+            return true;
+          } else {
+            console.log('Please enter a first name.');
+          }
+        },
+      },
+      {
+        type: 'input',
+        name: 'last_name',
+        message: 'Please enter a last name:',
+        validate: (inputLastName) => {
+          if (inputLastName) {
+            return true;
+          } else {
+            console.log('Please enter a last name.');
+          }
+        },
+      },
+      {
+        type: 'input',
+        name: 'role_id',
+        message: 'Please enter a role id for new employee:',
+        validate: (inputRoleId) => {
+          if (inputRoleId) {
+            return true;
+          } else {
+            console.log('Please enter a role id.');
+          }
+        },
+      },
+      {
+        type: 'input',
+        name: 'manager_id',
+        message: 'Please enter a manager id if applicable:',
+      },
+    ])
+    .then((response) => {
+      let query = `INSERT INTO employee SET ?`;
+
+      database.query(
+        query,
+        {
+          first_name: response.first_name,
+          last_name: response.last_name,
+          role_id: response.role_id,
+          manager_id: response.manager_id,
+        },
+        (err) => {
+          if (err) throw err;
+          console.log('New employee has been successfully added!');
+          mainMenu();
+        }
+      );
+    });
 };
 
 const addRole = () => {};
