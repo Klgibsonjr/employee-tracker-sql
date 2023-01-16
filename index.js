@@ -136,29 +136,31 @@ const viewAllRoles = () => {
 };
 
 const addDepartment = () => {
-  database.query(`SELECT * FROM department;`, (err, res) => {
-    if (err) throw err;
-    console.log(err);
+  inquirer
+    .prompt([
+      {
+        type: 'input',
+        name: 'department',
+        message: 'What department would you like to add?',
+      },
+    ])
+    .then((response) => {
+      console.log(response);
+      let query = `INSERT INTO department SET ?`;
 
-    inquirer
-      .prompt([
-        {
-          type: 'list',
-          name: 'department',
-          choices: ['Sales', 'Engineering', 'Finance', 'Customer Service'],
-        },
-      ])
-      .then((response) => {
-        let query = `INSERT INTO department (department_name) VALUES (?)`;
-        database.query(query, response.name, (err) => {
-          if (err) throw err;
-          console.log(response.name + ' department has been added.');
-        });
+      database.query(query, { department_name: response.department }, (err) => {
+        console.log(response.department);
+        if (err) throw err;
+        console.log(response.department + ' department has been added.');
+
+        mainMenu();
       });
-  });
+    });
 };
 
-const addEmployee = () => {};
+const addEmployee = () => {
+  database.query;
+};
 
 const addRole = () => {};
 
