@@ -255,6 +255,7 @@ const addRole = () => {
         (err) => {
           if (err) throw err;
           console.log('New role has been added successfully!');
+          mainMenu();
         }
       );
     });
