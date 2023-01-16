@@ -216,14 +216,49 @@ const addEmployee = () => {
         },
         (err) => {
           if (err) throw err;
-          console.log('New employee has been successfully added!');
+          console.log('New employee has been added successfully!');
           mainMenu();
         }
       );
     });
 };
 
-const addRole = () => {};
+const addRole = () => {
+  inquirer
+    .prompt([
+      {
+        type: 'input',
+        name: 'title',
+        message: 'Please enter the title for the new role:',
+      },
+      {
+        type: 'input',
+        name: 'salary',
+        message: 'Please enter a salary for this role:',
+      },
+      {
+        type: 'input',
+        name: 'department_id',
+        message: 'Please enter the corresponding department id for this role:',
+      },
+    ])
+    .then((response) => {
+      let query = `INSERT INTO role SET ?`;
+
+      database.query(
+        query,
+        {
+          title: response.title,
+          salary: response.salary,
+          department_id: response.department_id,
+        },
+        (err) => {
+          if (err) throw err;
+          console.log('New role has been added successfully!');
+        }
+      );
+    });
+};
 
 const updateEmployeeRole = () => {};
 
