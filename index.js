@@ -261,7 +261,40 @@ const addRole = () => {
     });
 };
 
-const updateEmployeeRole = () => {};
+const updateEmployeeRole = () => {
+  let query = `SELECT * FROM employee`;
+  database.query(query, (err, employees) => {
+    if (err) throw err;
+    let enrolledEmployees = employees.map((employee) => {
+      return {
+        name: `${employee.first_name} ${employee.last_name}`,
+        value: employee.id,
+      };
+    });
+    inquirer
+      .prompt([
+        {
+          type: 'list',
+          name: 'employee',
+          message: 'Please select the employee you want to update:',
+          choices: enrolledEmployees,
+        },
+        {
+          type: 'input',
+          name: 'role_id',
+          message: 'Please enter a new role id for this employee:',
+        },
+      ])
+      .then((response) => {
+        let query = `UPDATE employee SET role_id = ? WHERE id = ?`;
+        database.query(query, [response.role_id, response.employee], (err) => {
+          if (err) throw err;
+          console.log('Employee role has been updated successfully!');
+          mainMenu();
+        });
+      });
+  });
+};
 
 const updateEmployeeManager = () => {};
 

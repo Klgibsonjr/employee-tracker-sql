@@ -9,8 +9,8 @@ VALUES ('Sales Lead', 150000, 1),
        ('Salesperson', 75000, 1),
        ('Senior Software Engineer', 200000, 2),
        ('Software Engineer', 120000, 2),
-       ('Senior Account', 150000, 3),
-       ('Account', 100000, 3),
+       ('Senior Accountant', 150000, 3),
+       ('Accountant', 100000, 3),
        ('Service Manager', 80000, 4),
        ('Service Representative', 65000, 4);
 
