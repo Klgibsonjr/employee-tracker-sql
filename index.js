@@ -126,7 +126,7 @@ const viewAllEmployees = () => {
 const viewAllRoles = () => {
   console.log('Viewing all employee roles...\n');
 
-  const query = `SELECT role.id, role.title, role.department_id, role.salary FROM role;`;
+  const query = `SELECT role.id, role.title, role.department_id AS department, role.salary FROM role;`;
 
   database.query(query, (err, res) => {
     if (err) throw err;
@@ -200,10 +200,14 @@ const addEmployee = () => {
       {
         type: 'input',
         name: 'manager_id',
-        message: 'Please enter a manager id if applicable:',
+        message:
+          'Please enter a manager id if applicable (enter `null` if not applicable):',
       },
     ])
     .then((response) => {
+      if (response.manager_id === 'null') {
+        response.manager_id = null;
+      }
       let query = `INSERT INTO employee SET ?`;
 
       database.query(
