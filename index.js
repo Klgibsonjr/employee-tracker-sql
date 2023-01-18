@@ -35,7 +35,7 @@ const mainMenu = () => {
           'Update employee role',
           'Update employee manager',
           'View employees by department',
-          'View employee by manager',
+          'View employees by manager',
           'View total budget by department',
           'Quit',
         ],
@@ -97,7 +97,7 @@ const mainMenu = () => {
 const viewAllDepartments = () => {
   console.log('Viewing all departments...\n');
 
-  const query = `SELECT department.id AS id, department.department_name AS department FROM department`;
+  const query = `SELECT department.id AS id, department.department_name AS department FROM department;`;
 
   database.query(query, (err, res) => {
     if (err) throw err;
@@ -336,8 +336,33 @@ const updateEmployeeManager = () => {
   });
 };
 
-const viewEmployeesByDepartment = () => {};
+const viewEmployeesByDepartment = () => {
+  console.log('Viewing employees by departments...\n');
 
-const viewAllEmployeesByManager = () => {};
+  let query = `
+    SELECT employee.first_name, employee.last_name, department.department_name AS department
+    FROM employee
+    LEFT JOIN role ON employee.role_id = role.id
+    LEFT JOIN department ON role.department_id = department.id`;
+  database.query(query, (err, res) => {
+    if (err) throw err;
+    console.table(res);
+    mainMenu();
+  });
+};
+
+const viewAllEmployeesByManager = () => {
+  console.log('Viewing employees by manager...\n');
+
+  let query = `
+    SELECT employee.first_name, employee.last_name, CONCAT(manager.first_name, ' ', manager.last_name) AS manager
+    FROM employee
+    LEFT JOIN employee manager on manager.id = employee.manager_id`;
+  database.query(query, (err, res) => {
+    if (err) throw err;
+    console.table(res);
+    mainMenu();
+  });
+};
 
 const viewDepartmentBudget = () => {};
