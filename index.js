@@ -296,7 +296,45 @@ const updateEmployeeRole = () => {
   });
 };
 
-const updateEmployeeManager = () => {};
+const updateEmployeeManager = () => {
+  let query = `SELECT * FROM employee`;
+  database.query(query, (err, employees) => {
+    if (err) throw err;
+    let enrolledEmployees = employees.map((employee, manager) => {
+      return {
+        name: `${employee.first_name} ${employee.last_name}`,
+        manager: `${manager.first_name} ${manager.last_name}`,
+        value: employee.id,
+      };
+    });
+    inquirer
+      .prompt([
+        {
+          type: 'list',
+          name: 'employee',
+          message: 'Please select the employee you want to update:',
+          choices: enrolledEmployees,
+        },
+        {
+          type: 'input',
+          name: 'manager_id',
+          message: 'Please enter a new manager id for this employee:',
+        },
+      ])
+      .then((response) => {
+        let query = `UPDATE employee SET manager_id = ? WHERE id = ?`;
+        database.query(
+          query,
+          [response.manager_id, response.employee],
+          (err) => {
+            if (err) throw err;
+            console.log('Manager role has been updated successfully!');
+            mainMenu();
+          }
+        );
+      });
+  });
+};
 
 const viewEmployeesByDepartment = () => {};
 
