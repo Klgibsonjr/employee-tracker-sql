@@ -365,4 +365,18 @@ const viewAllEmployeesByManager = () => {
   });
 };
 
-const viewDepartmentBudget = () => {};
+const viewDepartmentBudget = () => {
+  console.log('Viewing department total budgets...\n');
+
+  let query = `
+    SELECT department.department_name AS department,
+    SUM(salary) As budget
+    FROM role
+    INNER JOIN department ON role.department_id = department.id
+    GROUP BY role.department_id;`;
+  database.query(query, (err, res) => {
+    if (err) throw err;
+    console.table(res);
+    mainMenu();
+  });
+};
