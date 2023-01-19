@@ -13,16 +13,17 @@ const database = mysql.createConnection(
   console.log('Connected to company database.')
 );
 
+console.log('');
+console.log('***************************');
+console.log('WELCOME TO EMPLOYEE TRACKER');
+console.log('***************************\n');
+
 database.connect((err) => {
   if (err) throw err;
   mainMenu();
 });
 
 const mainMenu = () => {
-  console.log('');
-  console.log('***************************');
-  console.log('WELCOME TO EMPLOYEE TRACKER');
-  console.log('***************************\n');
   return inquirer
     .prompt([
       {
@@ -99,6 +100,7 @@ const mainMenu = () => {
 };
 
 const viewAllDepartments = () => {
+  console.log('');
   console.log('Viewing all departments...\n');
 
   const query = `SELECT department.id AS id, department.department_name AS department FROM department;`;
@@ -111,6 +113,7 @@ const viewAllDepartments = () => {
 };
 
 const viewAllEmployees = () => {
+  console.log('');
   console.log('Viewing all employees...\n');
 
   const query = `SELECT employee.id, employee.first_name, employee.last_name, role.title, department.department_name AS department, role.salary, CONCAT(manager.first_name, ' ', manager.last_name) AS manager
@@ -128,6 +131,7 @@ const viewAllEmployees = () => {
 };
 
 const viewAllRoles = () => {
+  console.log('');
   console.log('Viewing all employee roles...\n');
 
   const query = `SELECT role.id, role.title, role.department_id AS department, role.salary FROM role;`;
