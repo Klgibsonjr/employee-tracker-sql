@@ -59,3 +59,9 @@ Below is a link to a walkthrough video showing the application functioning as in
 [Employee Tracker](https://drive.google.com/file/d/1p9xb_ribuh3EW7egahP1vs5bV3IgpGYu/view)
 
 ---
+
+![Employee Tracker](./assets/employee_tracker.png)
+
+## Contact
+
+[Github Repo](https://github.com/Klgibsonjr/employee-tracker-sql)
