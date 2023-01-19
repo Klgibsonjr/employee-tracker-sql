@@ -56,4 +56,6 @@ THEN I am prompted to select an employee to update and their new role and this i
 
 Below is a link to a walkthrough video showing the application functioning as intended.
 
-[Employee Tracker]()
+[Employee Tracker](https://drive.google.com/file/d/1p9xb_ribuh3EW7egahP1vs5bV3IgpGYu/view)
+
+---

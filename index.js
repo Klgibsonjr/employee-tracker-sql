@@ -19,6 +19,10 @@ database.connect((err) => {
 });
 
 const mainMenu = () => {
+  console.log('');
+  console.log('***************************');
+  console.log('WELCOME TO EMPLOYEE TRACKER');
+  console.log('***************************\n');
   return inquirer
     .prompt([
       {
