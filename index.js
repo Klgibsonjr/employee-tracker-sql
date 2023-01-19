@@ -311,6 +311,7 @@ const updateEmployeeManager = () => {
         value: employee.id,
       };
     });
+
     inquirer
       .prompt([
         {
@@ -326,6 +327,9 @@ const updateEmployeeManager = () => {
         },
       ])
       .then((response) => {
+        if (response.manager_id === 'null') {
+          response.manager_id = null;
+        }
         let query = `UPDATE employee SET manager_id = ? WHERE id = ?`;
         database.query(
           query,
